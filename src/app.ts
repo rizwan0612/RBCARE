@@ -19,7 +19,7 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use('/api/users', userRoutes);
+app.use('/api/user', userRoutes);
 app.use('/api/patient', patientRoutes);
 
 // Error handling

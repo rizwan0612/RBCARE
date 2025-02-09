@@ -18,7 +18,7 @@ app.use('/api-docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.de
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 // Routes
-app.use('/api/users', userRoutes_1.default);
+app.use('/api/user', userRoutes_1.default);
 app.use('/api/patient', patientRoutes_1.default);
 // Error handling
 app.use((req, res) => {
