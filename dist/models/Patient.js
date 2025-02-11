@@ -29,7 +29,7 @@ class PatientModel {
     }
     static create(patient) {
         return __awaiter(this, void 0, void 0, function* () {
-            const [result] = yield database_1.default.query('INSERT INTO patients (first_name, last_name, date_of_birth,gender,phone_number, address, email_address, emergency_contact_name, emergency_contact_number, created_at,updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)', [patient.first_name, patient.last_name, patient.date_of_birth, patient.gender, patient.address, patient.email_address, patient.phone_number, patient.emergency_contact_name, patient.emergency_contact_number, patient.created_at, patient.updated_at]);
+            const [result] = yield database_1.default.query('INSERT INTO patients (first_name, last_name, date_of_birth,gender,phone_number, address, email_address, emergency_contact_name, emergency_contact_number, created_at,updated_at,patient_number) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)', [patient.first_name, patient.last_name, patient.date_of_birth, patient.gender, patient.address, patient.email_address, patient.phone_number, patient.emergency_contact_name, patient.emergency_contact_number, patient.created_at, patient.updated_at, patient.patient_number]);
             // Handle potential null with type assertion
             const createdPatient = yield this.findById(result.insertId);
             if (!createdPatient) {

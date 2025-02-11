@@ -39,13 +39,7 @@ class PatientController {
     static createPatient(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { first_name, last_name, date_of_birth, gender, phone_number, address, email_address, emergency_contact_name, emergency_contact_number, created_at, updated_at } = req.body;
-                if (!first_name || !email_address) {
-                    return res.status(400).json({ message: 'first name and email are required' });
-                }
-                const newPatient = yield Patient_1.PatientModel.create({
-                    first_name, last_name, date_of_birth, gender, phone_number, address, email_address, emergency_contact_name, emergency_contact_number, created_at, updated_at
-                });
+                const newPatient = yield Patient_1.PatientModel.create(req.body);
                 res.status(201).json(newPatient);
             }
             catch (error) {

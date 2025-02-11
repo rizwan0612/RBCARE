@@ -29,7 +29,7 @@ class UserModel {
     }
     static create(user) {
         return __awaiter(this, void 0, void 0, function* () {
-            const [result] = yield database_1.default.query('INSERT INTO user (username, password_hash, email,role_id,created_at,updated_at) VALUES (?, ?, ?, ?, ?, ?)', [user.username, user.password_hash, user.email, user.role_id, user.created_at, user.updated_at]);
+            const [result] = yield database_1.default.query('INSERT INTO user (username, password, email,role_id,created_at,updated_at) VALUES (?, ?, ?, ?, ?, ?)', [user.username, user.password, user.email, user.role_id, user.created_at, user.updated_at]);
             // Handle potential null with type assertion
             const createdUser = yield this.findById(result.insertId);
             if (!createdUser) {
@@ -40,7 +40,7 @@ class UserModel {
     }
     static update(id, user) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.query('UPDATE user SET username = ?, password_hash = ?, email = ?, role_id = ?, updated_at = ? WHERE user_id = ?', [user.username, user.password_hash, user.email, user.role_id, user.updated_at, user.id]);
+            yield database_1.default.query('UPDATE user SET password = ?, role_id = ?, updated_at = ? WHERE user_id = ?', [user.password, user.role_id, user.updated_at, id]);
             const updatedUser = yield this.findById(id);
             if (!updatedUser) {
                 throw new Error('User not found after update');

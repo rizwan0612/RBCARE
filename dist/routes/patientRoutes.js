@@ -20,7 +20,7 @@ const router = (0, express_1.Router)();
 router.get('/', PatientController_1.PatientController.getPatients);
 /**
  * @swagger
- * /Patient:
+ * /Patient/{id}:
  *   get:
  *     summary: Get Patient By Id
  *     tags: [Patient]

@@ -21,7 +21,7 @@ router.get('/', PatientController.getPatients);
 
 /**
  * @swagger
- * /Patient:
+ * /Patient/{id}:
  *   get:
  *     summary: Get Patient By Id
  *     tags: [Patient]

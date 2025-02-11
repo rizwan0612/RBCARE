@@ -39,18 +39,11 @@ class UserController {
     static createUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { username, password_hash, email, role_id, created_at, updated_at } = req.body;
-                if (!username || !password_hash) {
-                    return res.status(400).json({ message: 'username and password are required' });
-                }
-                const newUser = yield User_1.UserModel.create({
-                    username,
-                    password_hash,
-                    email,
-                    role_id,
-                    created_at,
-                    updated_at
-                });
+                // const { username, password_hash, email, role_id, created_at, updated_at } = req.body;
+                // if (!username || !password_hash) {
+                //   return res.status(400).json({ message: 'username and password are required' });
+                // }
+                const newUser = yield User_1.UserModel.create(req.body);
                 res.status(201).json(newUser);
             }
             catch (error) {
@@ -74,8 +67,8 @@ class UserController {
     static deleteUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const task = yield User_1.UserModel.findById(parseInt(req.params.id));
-                if (!task)
+                const user = yield User_1.UserModel.findById(parseInt(req.params.id));
+                if (!user)
                     return res.status(404).json({ message: 'User not found' });
                 yield User_1.UserModel.delete(parseInt(req.params.id));
                 res.status(204).send();

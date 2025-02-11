@@ -10,7 +10,7 @@ const options: swaggerJsdoc.Options = {
       description: 'API Documentation for RB Care',
     },
     servers: [
-      { url: 'http://localhost:3002/api', description: 'Development' },
+      { url: 'http://localhost:3002', description: 'Development' },
     ],
     components: {
       securitySchemes: {
