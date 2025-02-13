@@ -21,6 +21,40 @@ router.get('/', UserController.getUsers);
 
 /**
  * @swagger
+ * /api/user/login:
+ *   post:
+ *     summary: Get a user by loginid
+ *     tags: [User]
+ *     parameters:
+ *       - in: path
+ *         name: loginid
+ *         schema:
+ *           type: object
+ *         required: true
+ *         description: string username of the user to retrieve
+ *     responses:
+ *       200:
+ *         description: User found
+ *         content:
+ *           application/json:
+ *             example:
+ *               id: 1
+ *               name: "John Doe"
+ *               email: "john@example.com"
+ *               age: 30
+ *       404:
+ *         description: User not found
+ *         content:
+ *           application/json:
+ *             example:
+ *               error: "User not found"
+ *       500:
+ *         description: Server error
+ */
+router.post('/login', UserController.getUserByLoginId);
+
+/**
+ * @swagger
  * /api/user/{id}:
  *   get:
  *     summary: Get a user by ID

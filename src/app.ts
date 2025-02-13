@@ -20,6 +20,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/user', userRoutes);
+app.use('/api/user/login', userRoutes);
 app.use('/api/patient', patientRoutes);
 
 // Error handling

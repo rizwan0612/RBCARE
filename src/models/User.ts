@@ -4,13 +4,21 @@ export interface User {
   id?: number;
   username: string;
   password: string;
-  email: boolean;
+  email: string;
+  address: string;
+  phone: string;
   role_id: number;
   created_at?: Date;
   updated_at?: Date;
 }
 
 export class UserModel {
+
+    static async findByLoginId(user: User): Promise<User | null> {
+      const [rows] = await pool.query('SELECT * FROM user WHERE email = ? and password = ?' , [user.email, user.password]);
+      return (rows as User[])[0] || null;
+    }
+
     static async findAll(): Promise<User[]> {
       const [rows] = await pool.query('SELECT * FROM user');
       return rows as User[];
@@ -23,8 +31,8 @@ export class UserModel {
   
     static async create(user: User): Promise<User> {
       const [result] = await pool.query(
-        'INSERT INTO user (username, password, email,role_id,created_at,updated_at) VALUES (?, ?, ?, ?, ?, ?)',
-        [user.username, user.password, user.email, user.role_id, user.created_at, user.updated_at]
+        'INSERT INTO user (username, password, email,role_id,created_at,updated_at,address,phone) VALUES (?,?, ?, ?, ?, ?, ?, ?)',
+        [user.username, user.password, user.email, user.role_id, user.created_at, user.updated_at, user.address,user.phone]
       );
       
       // Handle potential null with type assertion
