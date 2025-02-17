@@ -59,4 +59,9 @@ export class PatientModel {
     static async delete(id: number): Promise<void> {
       await pool.query('DELETE FROM patients WHERE id = ?', [id]);
     }
+    
+    static async findByPatientNo( patient: Patient): Promise<Patient | null> {
+      const [rows] = await pool.query('SELECT * FROM patients WHERE patient_number = ?', [patient.patient_number]);
+      return (rows as Patient[])[0] || null;
+    }
   }

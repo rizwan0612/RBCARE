@@ -22,6 +22,7 @@ app.use(express.json());
 app.use('/api/user', userRoutes);
 app.use('/api/user/login', userRoutes);
 app.use('/api/patient', patientRoutes);
+app.use('/api/patient/pno', patientRoutes);
 
 // Error handling
 app.use((req, res) => {

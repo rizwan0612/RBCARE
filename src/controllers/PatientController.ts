@@ -57,4 +57,14 @@ export class PatientController {
       res.status(500).json({ message: 'Server error' });
     }
   }
+
+  static async getByPatientNo(req: Request, res: Response) {
+    try {
+      const patient = await PatientModel.findByPatientNo(req.body);
+      if (!patient) return res.status(404).json({ message: 'Patient not found' });
+      res.json(patient);
+    } catch (error) {
+      res.status(500).json({ message: 'Server error' });
+    }
+  }
 }
