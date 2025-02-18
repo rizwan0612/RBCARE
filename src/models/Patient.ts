@@ -44,8 +44,8 @@ export class PatientModel {
   
     static async update(id: number, patient: Patient): Promise<Patient> {
       await pool.query(
-        'UPDATE patients SET first_name = ?, last_name = ?, date_of_birth = ?, gender = ?, address = ?, email_address=?, phone_number=?, emergency_contact_name=?, emergency_contact_number=?, updated_at=?  WHERE id = ?',
-        [patient.first_name, patient.last_name, patient.date_of_birth, patient.gender, patient.address, patient.email_address, patient.phone_number, patient.emergency_contact_name, patient.emergency_contact_number, patient.updated_at, id]
+        'UPDATE patients SET address = ?, email_address=?, phone_number=?, emergency_contact_name=?, emergency_contact_number=?, updated_at=?  WHERE id = ?',
+        [patient.address, patient.email_address, patient.phone_number, patient.emergency_contact_name, patient.emergency_contact_number, patient.updated_at, id]
       );
       
       const updatedUser = await this.findById(id);
