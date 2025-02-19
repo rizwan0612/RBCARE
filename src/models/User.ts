@@ -10,6 +10,7 @@ export interface User {
   role_id: number;
   created_at?: Date;
   updated_at?: Date;
+  status: number;
 }
 
 export class UserModel {
@@ -25,7 +26,7 @@ export class UserModel {
     }
   
     static async findById(id: number): Promise<User | null> {
-      const [rows] = await pool.query('SELECT * FROM user WHERE user_id = ?', [id]);
+      const [rows] = await pool.query('SELECT * FROM user WHERE id = ?', [id]);
       return (rows as User[])[0] || null;
     }
   
@@ -46,8 +47,8 @@ export class UserModel {
   
     static async update(id: number, user: User): Promise<User> {
       await pool.query(
-        'UPDATE user SET password = ?, role_id = ?, updated_at = ? WHERE user_id = ?',
-        [user.password, user.role_id, user.updated_at, id]
+        'UPDATE user SET password = ?, role_id = ?, status = ?, updated_at = ? WHERE id = ?',
+        [user.password, user.role_id, user.status, user.updated_at, id]
       );
       
       const updatedUser = await this.findById(id);
@@ -59,6 +60,6 @@ export class UserModel {
     }
   
     static async delete(id: number): Promise<void> {
-      await pool.query('DELETE FROM user WHERE user_id = ?', [id]);
+      await pool.query('DELETE FROM user WHERE id = ?', [id]);
     }
   }
