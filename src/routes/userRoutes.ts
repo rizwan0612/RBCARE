@@ -243,4 +243,49 @@ router.put('/:id', UserController.updateUser);
  */
 router.delete('/:id', UserController.deleteUser);
 
+
+/**
+ * @swagger
+ * /api/user/resetpassword:
+ *   post:
+ *     summary: Update a user by ID
+ *     tags: [User]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               password:
+ *                 type: string
+ *                 example: "Updated Name"
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 example: "updated@example.com"
+ *     responses:
+ *       200:
+ *         description: User updated successfully
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: "User updated successfully"
+ *       400:
+ *         description: Invalid input data
+ *         content:
+ *           application/json:
+ *             example:
+ *               error: "Invalid email format"
+ *       404:
+ *         description: User not found
+ *         content:
+ *           application/json:
+ *             example:
+ *               error: "User not found"
+ *       500:
+ *         description: Server error
+ */
+router.post('/resetpassword', UserController.resetPassword);
+
 export default router;

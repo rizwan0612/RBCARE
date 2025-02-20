@@ -79,4 +79,17 @@ export class UserController {
       res.status(500).json({ message: 'Server error' });
     }
   }
+
+  static async resetPassword(req: Request, res: Response) {
+    try {
+      const updatedUser = await UserModel.resetPassword(
+        req.body
+      );
+      
+      res.json(updatedUser);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Failed to reset password';
+      res.status(404).json({ message });
+    }
+  }
 }

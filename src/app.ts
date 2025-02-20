@@ -21,9 +21,10 @@ app.use(express.json());
 // Routes
 app.use('/api/user', userRoutes);
 app.use('/api/user/login', userRoutes);
+app.use('/api/user/role', userRoutes);
+app.use('/api/user/resetpassword', userRoutes);
 app.use('/api/patient', patientRoutes);
 app.use('/api/patient/pno', patientRoutes);
-app.use('/api/user/role', userRoutes);
 
 // Error handling
 app.use((req, res) => {

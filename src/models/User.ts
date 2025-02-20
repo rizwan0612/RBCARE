@@ -58,6 +58,25 @@ export class UserModel {
       
       return updatedUser;
     }
+
+    static async resetPassword(user: User): Promise<User> {
+      await pool.query(
+        'UPDATE user SET password = ? WHERE email = ?',
+        [user.password, user.email]
+      );
+      
+      const updatedUser = await this.findByEmail(user);
+      if (!updatedUser) {
+        throw new Error('User not found after update');
+      }
+      
+      return updatedUser;
+    }
+
+    static async findByEmail(user: User): Promise<User | null> {
+      const [rows] = await pool.query('SELECT * FROM user WHERE email = ?' , [user.email]);
+      return (rows as User[])[0] || null;
+    }
   
     static async delete(id: number): Promise<void> {
       await pool.query('DELETE FROM user WHERE id = ?', [id]);
