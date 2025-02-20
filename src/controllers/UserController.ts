@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import { User, UserModel } from '../models/User';
+import { UserModel } from '../models/User';
+import { RoleModel } from '../models/Role';
 
 export class UserController {
 
@@ -65,6 +66,15 @@ export class UserController {
       
       await UserModel.delete(parseInt(req.params.id));
       res.status(204).send();
+    } catch (error) {
+      res.status(500).json({ message: 'Server error' });
+    }
+  }
+
+  static async getRoles(req: Request, res: Response) {
+    try {
+      const roles = await RoleModel.findAll();
+      res.json(roles);
     } catch (error) {
       res.status(500).json({ message: 'Server error' });
     }

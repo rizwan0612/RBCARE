@@ -3,6 +3,24 @@ import { UserController } from '../controllers/UserController';
 
 const router = Router();
 
+
+
+/**
+ * @swagger
+ * /api/user/role:
+ *   get:
+ *     summary: Get all role
+ *     tags: [User]
+ *     responses:
+ *       200:
+ *         description: Successfully retrieved role
+ *         content:
+ *           application/json:
+ *             example:
+ *               user: [{ id: 1, name: "Admin" }]
+ */
+router.get('/role', UserController.getRoles);
+
 /**
  * @swagger
  * /api/user:

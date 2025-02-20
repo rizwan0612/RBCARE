@@ -16,7 +16,7 @@ export interface User {
 export class UserModel {
 
     static async findByLoginId(user: User): Promise<User | null> {
-      const [rows] = await pool.query('SELECT * FROM user WHERE email = ? and password = ?' , [user.email, user.password]);
+      const [rows] = await pool.query('SELECT * FROM user WHERE email = ? and password = ? and status=1' , [user.email, user.password]);
       return (rows as User[])[0] || null;
     }
 
@@ -47,8 +47,8 @@ export class UserModel {
   
     static async update(id: number, user: User): Promise<User> {
       await pool.query(
-        'UPDATE user SET password = ?, role_id = ?, status = ?, updated_at = ? WHERE id = ?',
-        [user.password, user.role_id, user.status, user.updated_at, id]
+        'UPDATE user SET password = ?, role_id = ?, status = ?, updated_at = ?, address = ?, phone = ? WHERE id = ?',
+        [user.password, user.role_id, user.status, user.updated_at, user.address, user.phone, id]
       );
       
       const updatedUser = await this.findById(id);
