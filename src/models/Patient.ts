@@ -14,6 +14,7 @@ export interface Patient {
   emergency_contact_number: string;  
   created_at?: Date;
   updated_at?: Date;
+  birthdate?:Date;
 }
 
 export class PatientModel {
@@ -29,8 +30,8 @@ export class PatientModel {
   
     static async create(patient: Patient): Promise<Patient> {
       const [result] = await pool.query(
-        'INSERT INTO patients (first_name, last_name, date_of_birth,gender,phone_number, address, email_address, emergency_contact_name, emergency_contact_number, created_at,updated_at,patient_number) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)',
-        [patient.first_name, patient.last_name, patient.date_of_birth, patient.gender, patient.address, patient.email_address, patient.phone_number, patient.emergency_contact_name, patient.emergency_contact_number, patient.created_at, patient.updated_at, patient.patient_number]
+        'INSERT INTO patients (first_name, last_name, date_of_birth,gender,phone_number, address, email_address, emergency_contact_name, emergency_contact_number, created_at,updated_at,patient_number,birthdate) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?, ?)',
+        [patient.first_name, patient.last_name, patient.date_of_birth, patient.gender, patient.address, patient.email_address, patient.phone_number, patient.emergency_contact_name, patient.emergency_contact_number, patient.created_at, patient.updated_at, patient.patient_number, patient.birthdate]
       );
       
       // Handle potential null with type assertion
@@ -44,8 +45,8 @@ export class PatientModel {
   
     static async update(id: number, patient: Patient): Promise<Patient> {
       await pool.query(
-        'UPDATE patients SET address = ?, email_address=?, phone_number=?, emergency_contact_name=?, emergency_contact_number=?, updated_at=?  WHERE id = ?',
-        [patient.address, patient.email_address, patient.phone_number, patient.emergency_contact_name, patient.emergency_contact_number, patient.updated_at, id]
+        'UPDATE patients SET address = ?, email_address=?, phone_number=?, emergency_contact_name=?, emergency_contact_number=?, updated_at=?, birthdate  WHERE id = ?',
+        [patient.address, patient.email_address, patient.phone_number, patient.emergency_contact_name, patient.emergency_contact_number, patient.updated_at, patient.birthdate, id]
       );
       
       const updatedUser = await this.findById(id);
