@@ -30,8 +30,13 @@ export class PatientModel {
 
   static async create(patient: Patient): Promise<Patient> {
     const [result] = await pool.query(
-      'INSERT INTO patients (first_name, last_name, date_of_birth,gender,phone_number, address, email_address, emergency_contact_name, emergency_contact_number, created_at,updated_at,patient_number,birthdate) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?, ?)',
-      [patient.first_name, patient.last_name, patient.date_of_birth, patient.gender, patient.address, patient.email_address, patient.phone_number, patient.emergency_contact_name, patient.emergency_contact_number, patient.created_at, patient.updated_at, patient.patient_number, patient.birthdate]
+      'INSERT INTO patients (first_name, last_name, gender, phone_number, address,'
+      + 'email_address, emergency_contact_name, emergency_contact_number, created_at, '
+      + 'updated_at, patient_number, birthdate) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)',
+      [patient.first_name, patient.last_name, patient.gender, patient.phone_number,
+      patient.address, patient.email_address, patient.emergency_contact_name,
+      patient.emergency_contact_number, patient.created_at, patient.updated_at,
+      patient.patient_number, patient.birthdate]
     );
 
     // Handle potential null with type assertion
