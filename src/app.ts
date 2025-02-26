@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes';
 import patientRoutes from './routes/patientRoutes';
+import doctorRoutes from './routes/doctorRoutes';
 import swaggerUi from 'swagger-ui-express';
 import swaggerSpec from './config/swagger';
 
@@ -25,6 +26,8 @@ app.use('/api/user/role', userRoutes);
 app.use('/api/user/resetpassword', userRoutes);
 app.use('/api/patient', patientRoutes);
 app.use('/api/patient/pno', patientRoutes);
+app.use('/api/doctor', doctorRoutes);
+app.use('/api/doctor/dno', doctorRoutes);
 
 // Error handling
 app.use((req, res) => {

@@ -15,6 +15,7 @@ export interface Patient {
   created_at?: Date;
   updated_at?: Date;
   birthdate?: Date;
+  hi_no: string;
 }
 
 export class PatientModel {
@@ -32,11 +33,11 @@ export class PatientModel {
     const [result] = await pool.query(
       'INSERT INTO patients (first_name, last_name, gender, phone_number, address,'
       + 'email_address, emergency_contact_name, emergency_contact_number, created_at, '
-      + 'updated_at, patient_number, birthdate) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)',
+      + 'updated_at, patient_number, birthdate, hi_no) VALUES (?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?, ?)',
       [patient.first_name, patient.last_name, patient.gender, patient.phone_number,
       patient.address, patient.email_address, patient.emergency_contact_name,
       patient.emergency_contact_number, patient.created_at, patient.updated_at,
-      patient.patient_number, patient.birthdate]
+      patient.patient_number, patient.birthdate, patient.hi_no]
     );
 
     // Handle potential null with type assertion
@@ -50,8 +51,8 @@ export class PatientModel {
 
   static async update(id: number, patient: Patient): Promise<Patient> {
     await pool.query(
-      'UPDATE patients SET address = ?, email_address=?, phone_number=?, emergency_contact_name=?, emergency_contact_number=?, updated_at=?, birthdate=?  WHERE id = ?',
-      [patient.address, patient.email_address, patient.phone_number, patient.emergency_contact_name, patient.emergency_contact_number, patient.updated_at, patient.birthdate, id]
+      'UPDATE patients SET address = ?, email_address=?, phone_number=?, emergency_contact_name=?, emergency_contact_number=?, updated_at=?, birthdate=?,  hi_no= ? WHERE id = ?',
+      [patient.address, patient.email_address, patient.phone_number, patient.emergency_contact_name, patient.emergency_contact_number, patient.updated_at, patient.birthdate, patient.hi_no, id]
     );
 
     const updatedUser = await this.findById(id);
