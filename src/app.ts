@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes';
 import patientRoutes from './routes/patientRoutes';
 import doctorRoutes from './routes/doctorRoutes';
+import departmentRoutes from './routes/departmentRoutes';
 import swaggerUi from 'swagger-ui-express';
 import swaggerSpec from './config/swagger';
 
@@ -28,6 +29,7 @@ app.use('/api/patient', patientRoutes);
 app.use('/api/patient/pno', patientRoutes);
 app.use('/api/doctor', doctorRoutes);
 app.use('/api/doctor/dno', doctorRoutes);
+app.use('/api/department', departmentRoutes);
 
 // Error handling
 app.use((req, res) => {
